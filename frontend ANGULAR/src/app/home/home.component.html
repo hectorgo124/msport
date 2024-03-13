@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <!-- IZQUIERDA -->
+    <div class="col-md-6 col-12">
+      <!-- NOM APELLIDOS CATEGORIA DEL USUARI -->
+      <div class="row">
+        <ng-container *ngIf="usuario">
+          <h2>{{ usuario.nombre }} {{ usuario.apellidos }}</h2>
+          <h4>{{ categoria }}</h4>
+        </ng-container>
+      </div>
+      <!-- CARD ENTRENAMENT HUI Y BOTO VER MAS-->
+      <div class="row justify-content-center">
+        <div class="card">
+          <div class="tools">
+            <div class="circle">
+              <span class="red box"></span>
+            </div>
+            <div class="circle">
+              <span class="yellow box"></span>
+            </div>
+            <div class="circle">
+              <span class="green box"></span>
+            </div>
+            <div class="card__content">
+              Entrenamiento {{stringFecha}}
+            </div>
+          </div>
+          <div class="card__content cont-sesion">
+            <ng-container *ngIf="sesion">
+              {{ sesion }}
+            </ng-container>
+            <ng-container *ngIf="!sesion && !enlace">
+              No hay entrenamiento para hoy.
+            </ng-container>
+            <ng-container *ngIf="enlace">
+              Entrenamiento de esta semana en <a class="enlace" href="{{enlace}}">este enlace</a> .
+            </ng-container>
+          </div>
+        </div>
+
+        <button class="boton-grow" (click)="abrirEntrenamiento()">
+          VER SEMANA
+        </button>
+      </div>
+    </div>
+    <!-- DERECHA -->
+    <div class="col-md-6 col-12">
+      <!-- titul notificacions + nom club -->
+      <div class="row cont__noti">
+        <ng-container *ngIf="club">
+          <h3>Notificaciones {{ club.nombre }}</h3>
+        </ng-container>
+        <!-- LLISTA NOTIFICACIONS -->
+        <ng-container *ngIf="notificaciones">
+          <div class="row noti p-3 mx-2" *ngFor="let noti of notificaciones">
+            <div class="col-12 ">
+              <div class="row">
+                {{noti.description}}
+              </div>
+              <div class="row">
+                <a href="{{noti.enlace}}">{{noti.enlace}}</a>
+              </div>
+              <div class="row">
+                <br>
+                Fecha: {{noti.fechaInicio}}
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+</div>

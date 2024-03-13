@@ -1,0 +1,57 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+    // background-image: url('../../assets/fondo-login.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    margin: 0;
+  }
+
+form {
+  display: flex;
+}
+.boton-grow {
+  background-color: var(--color-azul-oscuro);
+}
+
+.boton-grow::after {
+  background-color: var(--color-naranja);
+}
+
+.cont_form {
+  display: flex;
+    background-color: rgba(255, 255, 255, 0.7);
+    align-items: center;
+}
+
+.cont_campo {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.iniciar {
+  margin-top: 5%;
+}
+
+.cont_error {
+  background-color: rgb(241, 174, 174);
+    border: 1px solid rgb(236, 50, 50);
+    border-radius: 5px;display: flex;
+  width: 60%;
+  align-items: center;
+}
+
+span {
+  text-align: center;
+}
+.mat-icon {
+  overflow: inherit;
+}
+
+.inputbox {
+  position: relative;
+  width: 60%;
+}

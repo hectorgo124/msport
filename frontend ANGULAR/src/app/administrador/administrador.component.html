@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row" *ngIf="!mostrarNoti">
+    <div class="col-lg-9 col-md-8 mt-3">
+      <div class="row justify-content-center mb-2"  *ngIf="!mostrarForm" >
+        <button class="boton-grow d-flex justify-content-center" (click)="cambiarForm()">NUEVO
+          USUARIO
+          <mat-icon>group_add</mat-icon>
+        </button>
+      </div>
+      <div class="row justify-content-center mb-2" *ngIf="!mostrarForm">
+        <button class="boton-grow d-flex justify-content-center"
+          (click)="panelNoti()">NOTIFICACIONES
+          <mat-icon>notifications</mat-icon>
+        </button>
+      </div>
+
+        <app-form *ngIf="mostrarForm" [user]="user" (atras)="cambiarForm()" [clubId]="currentUser.clubId"></app-form>
+    </div>
+    <div class="col-lg-3 col-md-4 mt-3 mb-3">
+      <div class="lista__usuarios">
+        <h2>Usuarios <b>{{club}}</b> </h2>
+        <div *ngFor="let user of users" class="lista__user">
+          <div class="lista__texto" (click)="editarUsuario(user)">{{user.nombre}} {{user.apellidos}}</div>
+          <mat-icon *ngIf="user.sexo === 'Hombre'" class="sex">male</mat-icon>
+          <mat-icon *ngIf="user.sexo === 'Mujer'" class="sex">female</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <app-panel-notificaciones [clubId]="currentUser.clubId" (atras)="panelNoti()" *ngIf="mostrarNoti"></app-panel-notificaciones>
+</div>

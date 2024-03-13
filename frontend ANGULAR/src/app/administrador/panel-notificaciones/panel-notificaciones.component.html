@@ -1,0 +1,42 @@
+<div class="row" *ngIf="!verFormulario">
+    <div class="row justify-content-center mb-3 justify-content-center">
+        <div class="col-2">
+            <button class="boton-atras" (click)="atras.emit(null)"><mat-icon>arrow_back</mat-icon></button>
+        </div>
+        <div class="col-md-5 d-flex align-items-center">
+            <button class="boton-grow" (click)="verFormulario = true;"> <mat-icon>add</mat-icon> Nueva
+                Notificacion</button>
+        </div>
+    </div>
+    <!-- contenedor notificaciones -->
+    <div class="row">
+        <div *ngFor="let noti of notificaciones" class="col-md-3 col-12 noti">
+            <div class="row">
+                <div class="col-12">
+                    <button class="boton-eliminar" (click)="eliminar(noti.id)"><mat-icon>delete</mat-icon></button>
+                </div>
+            </div>
+            <div class="row" (click)="abrirEditar(noti.id)">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        Descripcion: {{noti.description}}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        Inicio: {{noti.fechaInicio}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Fin: {{noti.fechaFin}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Formulario Editar -->
+<app-noti-form *ngIf="verFormulario" [id]="id" [clubId]="clubId" (atras)="abrirEditar(0)"></app-noti-form>

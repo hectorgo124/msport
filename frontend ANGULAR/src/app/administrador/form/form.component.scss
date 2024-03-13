@@ -1,0 +1,75 @@
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.form__cont-error {
+  color: black;
+  padding: 5px;
+  background-color: rgb(241, 174, 174);
+  border: 1px solid rgb(236, 50, 50);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.mat-icon {
+  overflow: inherit;
+}
+
+.select {
+  box-sizing: border-box;
+  border: 2px solid var(--color-light);
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--color-light);
+}
+
+.success {
+  background: rgb(148, 248, 148);
+  color: black;
+  cursor: pointer;
+  padding: 16px 20px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+  border: 0;
+  width: 100%;
+}
+
+.boton-eliminar {
+  border-radius: 100%;
+  margin-left: 5px;
+}
+
+.boton-grow {
+  width: 98%;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  background-color: var(--color-azul);
+}
+
+.boton-grow::after {
+  background-color: var(--color-naranja);
+}
+
+.boton-atras {
+  background-color: var(--color-azul-oscuro);
+}
+
+.boton-atras::after {
+  background-color: var(--color-azul);
+}
+
+.visible {
+  padding-left: 0;
+}

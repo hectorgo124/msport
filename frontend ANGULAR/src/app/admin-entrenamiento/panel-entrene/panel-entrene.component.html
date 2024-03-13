@@ -1,0 +1,179 @@
+<div class="row justify-content-center" *ngIf="!addParticipantes">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-1"><button class="boton-atras" (click)="atras.emit(null)"><mat-icon><span
+                            class="material-symbols-outlined">
+                            arrow_back_ios_new
+                        </span></mat-icon></button></div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <h1>{{entrene.nombre}}</h1>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <h1>{{ entrene.temporada }}</h1>
+            </div>
+            <div class="col-md-2 col-12 d-flex justify-content-center">
+                <button class="boton-eliminar" (click)="abrirAlerta()">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- VISTA PARA ELEGIR TIPO -->
+        <div class="row mt-2" *ngIf="vistaElegir">
+            <div class="row justify-content-center">
+                <h2>Elegir modo:</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <button class="boton-grow" (click)="enviarTipo(0)">ENLACE</button>
+                </div>
+                <div class="col-md-4">
+                    <button class="boton-grow" (click)="enviarTipo(1)">MANUAL</button>
+                </div>
+            </div>
+        </div>
+        <!-- CUANDO YA TIENE TIPO -->
+        <div class="row mt-2" *ngIf="entrene.tipo === 0">
+            <!-- VISTA PARA ENLACES -->
+            <div class="row justify-content-center">
+                <mat-calendar style="width:200px; border: 2px solid var(--color-azul); border-radius: 3px;"
+                    (selectedChange)="nuevaFecha($event)" [(selected)]="fecha"></mat-calendar>
+            </div>
+
+            <div class="row mt-3">
+                <h3>Enlace entrenamiento semana: {{inicioSemana}} - {{finalSemana}}</h3>
+                <input type="text" [(ngModel)]="sesion.enlace" (ngModelChange)="modificado()">
+            </div>
+
+            <div class="row mt-2" *ngIf="!vistaElegir">
+                <div class="col-12">
+                    <button class="boton-grow" *ngIf="!isSuccessful && !modificar" (click)="guardarSesion()">
+                        GUARDAR
+                    </button>
+                    <button class="success" *ngIf="isSuccessful" (click)="guardarSesion()">
+                        GUARDADO
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- VISTA PARA MANUAL -->
+        <div class="row mt-2 justify-content-center" *ngIf="entrene.tipo === 1">
+            <!-- CALENDARI -->
+            <div class="row justify-content-center">
+                <mat-calendar style="width:200px; border: 2px solid var(--color-azul); border-radius: 3px;"
+                    (selectedChange)="nuevaFecha($event)" [(selected)]="fecha"></mat-calendar>
+            </div>
+            <!-- BOTO GUARDAR -->
+            <div class="row mt-2" *ngIf="!vistaElegir">
+                <div class="col-12">
+                    <button class="boton-grow" *ngIf="!isSuccessful && !modificar" (click)="guardarSesion()">
+                        GUARDAR
+                    </button>
+                    <button class="success" *ngIf="isSuccessful" (click)="guardarSesion()">
+                        GUARDADO
+                    </button>
+                </div>
+            </div>
+            <!-- TABLA -->
+            <div  class="row justify-content-center">
+                <!-- LUNES -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Lunes {{diasSemana[0]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.lunes">
+                            {{sesion.lunes}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- MARTES -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Martes {{diasSemana[1]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.martes">
+                            {{sesion.martes}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- MIERCOLES -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Miercoles {{diasSemana[2]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.miercoles">
+                            {{sesion.miercoles}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- JUEVES -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Jueves {{diasSemana[3]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.jueves">
+                            {{sesion.jueves}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- VIERNES -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Viernes {{diasSemana[4]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.viernes">
+                            {{sesion.viernes}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- SABADO -->
+                <div class="row fila-tabla">
+                    <div class="col-md-3 text-center">
+                        Sábado {{diasSemana[5]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.sabado">
+                            {{sesion.sabado}}
+                        </textarea>
+                    </div>
+                </div>
+                <!-- DOMINGO -->
+                <div class="row fila-tabla mb-3">
+                    <div class="col-md-3 text-center">
+                        Domingo {{diasSemana[6]}}
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="7" (ngModelChange)="modificado()" [(ngModel)]="sesion.domingo">
+                            {{sesion.domingo}}
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="col-md-3 mt-2 cont__usuarios">
+        <div class="row">
+            <div class="col-9 col-md-8">
+                <h4>Participantes: ({{usuarios.length}})</h4>
+            </div>
+            <div class="col-3 col-md-4"><button class="boton-grow"
+                    (click)="cambiarAdd()"><mat-icon>edit</mat-icon></button></div>
+        </div>
+        <div class="row  usuarios" *ngFor="let usuario of usuarios">
+            <div class=" col-12 d-flex align-items-center justify-content-between">
+                {{usuario.nombre}} {{usuario.apellidos}}
+                <mat-icon *ngIf="usuario.sexo === 'Hombre'" class="sex">male</mat-icon>
+                <mat-icon *ngIf="usuario.sexo === 'Mujer'" class="sex">female</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="addParticipantes">
+    <app-participantes (atras)="cambiarAdd()" [clubId]="clubId" [entrene]="entrene"></app-participantes>
+</div>

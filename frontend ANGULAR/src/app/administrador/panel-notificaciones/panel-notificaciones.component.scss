@@ -1,0 +1,27 @@
+.noti {
+  color: var(--color-light);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.noti:nth-child(3n + 1) {
+  background: var(--color-azul-oscuro);
+}
+.noti:nth-child(3n + 2) {
+  background: var(--color-azul);
+}
+.noti:nth-child(3n + 3) {
+  background: var(--color-azul-medio);
+}
+
+.boton-grow {
+    display: flex;
+    align-content:center ;
+    width: 100%;
+    justify-content: center;
+}
+
+.boton-eliminar {
+  border-radius: 100%;
+  z-index: 100;
+}

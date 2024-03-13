@@ -1,0 +1,112 @@
+
+.principal {
+  display: flex;
+  flex-direction: column;
+}
+
+// parte de arriba
+.cont__top {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cont__select {
+  // width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+
+  span {
+    margin-bottom: 5px;
+  }
+}
+
+.select {
+  border: 3px solid var(--color-azul);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+// parte de albums
+
+.cont__albums {
+  padding: 3%;
+  height: 60vh;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.album {
+  // width: 30%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--color-light);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  a {
+    text-decoration: none;
+    color: var(--color-light);
+  }
+}
+
+.cont__enlace {
+  // margin-top: 10px;
+  display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.album:nth-child(even) {
+  background: var(--color-azul-oscuro);
+}
+.album:nth-child(odd) {
+  background: var(--color-azul);
+}
+
+.boton_contenido {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.boton-eliminar {
+  background-color: rgb(255, 190, 190);
+  color: black;
+}
+
+.boton-eliminar:hover {
+  color: black;
+}
+.boton-eliminar::after {
+  background-color: red;
+}
+
+.error {
+  color: black;
+}
+
+.icono-editar {
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.row {
+  justify-content: center;
+}
+
+.boton-grow, .boton-eliminar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cont__checkbox {
+  margin-top: 1rem;
+}

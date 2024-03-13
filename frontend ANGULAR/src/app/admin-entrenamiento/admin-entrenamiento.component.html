@@ -1,0 +1,50 @@
+<div class="container" *ngIf="!formulario && !panel">
+    <div class="row">
+        <div class="col-md-2 col-12">
+            <button class="boton-grow" (click)="abrirFormulario()"><mat-icon>add</mat-icon> Nuevo</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row mt-2">
+                <div class="col-md-9 col-7">
+                    <h2>Entrenamientos</h2>
+                </div>
+                <div class="col-md-3 col-5">
+                    <span>Temporada:</span>
+                    <mat-select class="select" (selectionChange)="filtrarTemporada(idTemporada)" name="temporada"
+                        [(ngModel)]="idTemporada" id="temporada">
+                        <mat-option [value]="0" selected>Todas</mat-option>
+                        <mat-option *ngFor="let temporada of temporadas" [value]="temporada.id">
+                            {{ temporada.description }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="cont__entrenamientos mt-2" *ngIf="!mensaje">
+                <div class="row cont__entrene" *ngFor="let entrenamiento of entrenamientos">
+                    <div class="col-md-10 col-8">
+                        <h3 class="titulo-entrene" (click)="abrirPanel(entrenamiento)">{{ entrenamiento.nombre }}</h3>
+                    </div>
+                    <div class="col-md-2 col-4">
+                        <h5> {{ entrenamiento.temporada }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="mensaje" class="row mt-4">
+                <div class="col-12">
+                    {{ mensaje }} <mat-icon>sentiment_dissatisfied</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="formulario">
+    <app-form-entrenamiento (atras)="abrirFormulario()" [clubId]="currentUser.clubId" [temporadas]="temporadas"></app-form-entrenamiento>
+</div>
+<div class="container" *ngIf="panel">
+    <app-panel-entrene [entrene]="entrene" [clubId]="currentUser.clubId" (atras)="abrirPanel(null)" >
+
+    </app-panel-entrene>
+</div>

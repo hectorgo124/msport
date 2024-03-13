@@ -1,0 +1,70 @@
+<div class="row">
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <!-- ATRAS -->
+        <div class="row">
+            <div class="form-group form__botones col-md-2 col-12">
+                <button class="boton-atras" (click)="atras.emit(null)">Atrás</button>
+            </div>
+        </div>
+        <!-- formulario -->
+        <!-- nombre -->
+        <div class="row align-items-center">
+            <div class="col-3 col-lg-4 d-flex justify-content-end">
+                Nombre:
+            </div>
+            <div class="col-9 col-md-5 d-flex justify-content-start align-items-center">
+                <input type="text" class="form-control" name="nombre" [(ngModel)]="form.nombre" required minlength="3"
+                    #nombre="ngModel" />
+                <mat-icon>nombre</mat-icon>
+            </div>
+            <div class="form__cont-error col-12 col-lg-3 col-md-4 align-items-center"
+                *ngIf="nombre.errors && f.submitted">
+                <mat-icon>error</mat-icon>
+                <div class="form__texto-error" *ngIf="nombre.errors['required']">Introduce una breve descripción
+                </div>
+                <div class="form__texto-error" *ngIf="nombre.errors['minlength']">
+                    Mínimo 3 caracteres
+                </div>
+            </div>
+        </div>
+        <!-- TEMPORADA -->
+        <div class="row align-items-center mt-2">
+            <div class="col-lg-4 col-3 d-flex justify-content-end">
+                Temporada:
+            </div>
+            <div class="col-9 col-md-5 d-flex justify-content-start align-items-center">
+                <mat-select class="select" name="temporada" id="temporada" [(ngModel)]="form.temporada"
+                    #temporada="ngModel" required>
+                    <mat-option *ngFor="let temporada of temporadas" [value]="temporada.id">
+                        {{ temporada.description }}
+                    </mat-option>
+                </mat-select>
+                <mat-icon>event_note</mat-icon>
+            </div>
+            <div class="form__cont-error col-12 col-md-4 col-lg-3 align-items-center"
+                *ngIf="temporada.errors && f.submitted">
+                <mat-icon>error</mat-icon>
+                <div class="form__texto-error" *ngIf="temporada.errors['required']">Selecciona una temporada</div>
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-6 col-12">
+                <button class="boton-grow">Añadir</button>
+                <div class="form__cont-error" *ngIf="f.submitted && errorEnviar">
+                    <mat-icon>error</mat-icon>
+                    <div class="form__texto-error">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row" *ngIf="isSuccessful">
+        <div class="cont__label col-12 d-flex justify-content-center">
+            Entrenamiento creado!
+        </div>
+        <hr>
+        <button class="boton-grow col-12 d-flex justify-content-center"  (click)="recargar()">Continuar</button>
+    </div>
+</div>

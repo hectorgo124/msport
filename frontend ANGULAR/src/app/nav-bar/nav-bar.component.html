@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark p-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../assets/logo.png" width="200" height="50" alt="">
+    </a>
+    <button *ngIf="isLoggedIn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <button *ngIf="!isLoggedIn" class="button--info info"
+    (click)="clickMenu('/about')"><mat-icon>info</mat-icon></button>
+
+    <div *ngIf="isLoggedIn" class=" collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto ">
+        <li class="nav-item">
+          <a class="nav-link mx-2" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="/home" routerLink="home">INICIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="/galeria" routerLink="galeria">GALERIA</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="/entrenamiento" routerLink="entrenamiento">ENTRENAMIENTO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" *ngIf="showAdminBoard" href="/administrador" routerLink="administrador">ADMINISTRADOR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" *ngIf="showEntrenadorBoard" href="/entrenador" routerLink="entrenador">MOD. ENTRENAMIENTOS</a>
+        </li>
+        <li class="nav-item" *ngIf="user">
+          <a class="navbar__profile-link nav-link mx-2" *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="menu">
+            {{ user.username }}
+          </a>
+          <mat-menu #menu="matMenu" class="user__menu">
+            <button (click)="clickMenu('/profile')" mat-menu-item data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"><mat-icon>account_circle</mat-icon><span
+                class="user__menu__text">PERFIL</span> </button>
+            <button class="info" (click)="clickMenu('/about')" mat-menu-item data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"><mat-icon>info</mat-icon><span
+                class="user__menu__text">INFO</span></button>
+            <button (click)="logout()" mat-menu-item><mat-icon data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">power_off</mat-icon><span
+                class="user__menu__text">SALIR</span></button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

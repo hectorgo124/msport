@@ -1,0 +1,35 @@
+.boton-grow{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+div {
+    // outline-style: dotted;
+    // outline-width: 2px;
+    // outline-color: red;
+}
+
+.select {
+    border: 3px solid var(--color-azul);
+    padding: 6px;
+    border-radius: 4px;
+    min-width: 100%;
+    width: auto;
+  }
+
+  .cont__entrene:nth-child(even) {
+    background: var(--color-azul-oscuro);
+  }
+  .cont__entrene:nth-child(odd) {
+    background: var(--color-azul);
+  }
+
+  .cont__entrene {
+    align-items: center;
+    color: var(--color-light);
+  }
+
+  .titulo-entrene {
+    cursor: pointer;
+  }

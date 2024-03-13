@@ -1,0 +1,26 @@
+.select {
+  border: 3px solid var(--color-azul);
+  padding: 6px;
+  border-radius: 4px;
+  min-width: 100%;
+  width: auto;
+}
+
+.usuarios {
+  color: var(--color-light);
+  padding: 3px;
+}
+
+.usuarios:nth-child(3n + 1) {
+  background: var(--color-azul-oscuro);
+}
+.usuarios:nth-child(3n + 2) {
+  background: var(--color-azul);
+}
+.usuarios:nth-child(3n + 3) {
+  background: var(--color-azul-medio);
+}
+
+.flecha {
+  cursor: pointer;
+}

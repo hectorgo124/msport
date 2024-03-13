@@ -1,0 +1,106 @@
+<!-- <div class="container">
+  <div class="" *ngIf="isSuccessful">Cambiado correctamente!</div>
+
+  <div class="cont__perfil" *ngIf="!isSuccessful">
+    <div class="cont__datos">Nombre de usuario: <b>{{currentUser.username}}</b></div>
+    <div class="cont__datos">Nombre: <b>{{currentUser.nombre}}</b></div>
+    <div class="cont__datos">Apellidos: <b>{{currentUser.apellidos}}</b></div>
+    <div class="cont__datos">Categoria: <b>{{categoria}} <mat-icon>{{sex}}</mat-icon></b></div>
+    <div class="cont__contrasenya">
+      <div class="cont__label">
+        <label for="password">Nueva contraseña:</label>
+      </div>
+      <div class="cont__input">
+        <input type="password" id="password" class="form-control" (input)="comprobarContrasenya()" name="password" [(ngModel)]="newPassword" required
+          minlength="6" #password="ngModel" />
+      </div>
+      <div class="cont__icon">
+        <mat-icon (click)="mostrarContrasenya()">{{iconVisibility}}</mat-icon>
+      </div>
+      
+    </div>
+    <div class="cont__error__boton">
+      <div class="cont__error" *ngIf="errorContrasenya">
+        <mat-icon>error</mat-icon>
+        <div class="texto-error" >
+          Mínimo 6 caracteres
+        </div>
+      </div>
+      <div *ngIf="!errorContrasenya && newPassword.length >= 6">
+        <button class="boton-grow" (click)="update()">CAMBIAR</button>
+      </div>
+    </div>
+    
+  </div>
+</div> -->
+<div class="container">
+  <div class="row card-container">
+    <div class="card">
+      <div class="tools">
+        <div class="circle">
+          <span class="red box"></span>
+        </div>
+        <div class="circle">
+          <span class="yellow box"></span>
+        </div>
+        <div class="circle">
+          <span class="green box"></span>
+        </div>
+        <div class="card__content">
+          {{currentUser.nombre}} {{currentUser.apellidos}}
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="row mt-2">
+              <div class="col-5">
+                Nombre Usuario:
+              </div>
+              <div class="col-7">
+                {{currentUser.username}}
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-5">
+                Categoria:
+              </div>
+              <div class="col-7">
+                {{categoria}}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-3"></div>
+        </div>
+        <div class="row mt-5 mb-3 align-items-center">
+          <div class="col-5">
+            Nueva contraseña:
+          </div>
+          <div class="col-md-12 col-lg-7 col-12">
+            <div class="row align-items-center">
+              <div class="inputbox col-10">
+                <input type="password" name="password" id="password" [(ngModel)]="newPassword"
+                  (input)="comprobarContrasenya()" required #password="ngModel" minlength="6" />
+                <span>Min. 6 caracteres:</span>
+                <i></i>
+              </div>
+              <div class="col-2">
+                <mat-icon (click)="mostrarContrasenya()">{{iconVisibility}}</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex justify-content-center mb-2" *ngIf="!errorContrasenya && newPassword.length >= 6">
+            <button class="boton-grow" *ngIf="!isSuccessful && !modificar" (click)="update()">CAMBIAR</button>
+            <button class="success" *ngIf="isSuccessful" (click)="update()">
+              CAMBIADA
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

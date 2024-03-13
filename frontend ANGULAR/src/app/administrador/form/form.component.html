@@ -1,0 +1,177 @@
+<div class="row card-container" *ngIf="!isSuccessful">
+    <div class="card">
+        <div class="tools">
+            <div class="circle">
+                <span class="red box"></span>
+            </div>
+            <div class="circle">
+                <span class="yellow box"></span>
+            </div>
+            <div class="circle">
+                <span class="green box"></span>
+            </div>
+            <button class="boton-atras" (click)="atras.emit(null)">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <button class="boton-eliminar" (click)="eliminarUser()" *ngIf="editar">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <div class="card__content">
+            <!-- TODO EL CONTENIDO -->
+            <div class="row">
+                <form name="form" class="formulario" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="col-12">
+                        <!-- nombre usuario -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-12">
+                                Nombre Usuario:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <input type="text" name="username" (ngModelChange)="isSuccessful = false;"
+                                    [(ngModel)]="form.username" required minlength="3" maxlength="20"
+                                    #username="ngModel" />
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="username.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container *ngIf="username.errors['required']">Introduce el nombre de
+                                    usuario</ng-container>
+                                <ng-container class="form__texto-error" *ngIf="username.errors['minlength']">
+                                    Mínimo 3 caracteres
+                                </ng-container>
+                                <ng-container class="form__texto-error" *ngIf="username.errors['maxlength']">
+                                    Máximo 20 caracteres
+                                </ng-container>
+                            </div>
+                        </div>
+                        <!-- Nombre -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-12">
+                                Nombre:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <input type="text" name="nombre" [(ngModel)]="form.nombre" required #nombre="ngModel" />
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="nombre.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container *ngIf="nombre.errors['required']">Introduce el nombre</ng-container>
+                            </div>
+                        </div>
+                        <!-- Apellidos  -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-12">
+                                Apellidos:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <input type="text" name="apellidos" [(ngModel)]="form.apellidos" required
+                                    #apellidos="ngModel" />
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="apellidos.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container *ngIf="apellidos.errors['required']">Introduce los
+                                    apellidos</ng-container>
+                            </div>
+                        </div>
+                        <!-- Contraseña -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-12">
+                                Contraseña:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <input type="password" id="password" name="password" [(ngModel)]="form.password"
+                                    [required]="!editar" minlength="6" #password="ngModel" />
+                            </div>
+                            <div class="col-1 visible">
+                                <mat-icon (click)="mostrarContrasenya()">{{iconVisibility}}</mat-icon>
+                            </div>
+                            <div class=" col-12 form__cont-error" *ngIf="password.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container *ngIf="password.errors['required']">Introduce una
+                                    contraseña</ng-container>
+                                <ng-container *ngIf="password.errors['minlength']">
+                                    Mínimo 6 caracteres
+                                </ng-container>
+                            </div>
+                        </div>
+                        <!-- sexo -->
+                        <div class="row align-items-center mt-3">
+                            <div class="col-lg-3 col-12">
+                                Sexo:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <input type="radio" name="sexo" value="Hombre" [(ngModel)]="form.sexo" required
+                                    #sexo="ngModel" />
+                                Hombre
+                                <input type="radio" name="sexo" value="Mujer" [(ngModel)]="form.sexo" required
+                                    #sexo="ngModel" />
+                                Mujer
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="sexo.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container *ngIf="sexo.errors['required']">Elige el sexo</ng-container>
+                            </div>
+                        </div>
+                        <!-- Rol -->
+                        <div class="row align-items-center mt-3">
+                            <div class="col-lg-3 col-12">
+                                Rol:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <mat-select class="select" name="role" id="role" [(ngModel)]="form.role" #role="ngModel"
+                                    required>
+                                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                                        {{ role.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="role.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container class="form__texto-error" *ngIf="role.errors['required']">Indica el
+                                    rol</ng-container>
+                            </div>
+                        </div>
+                        <!-- Categoria -->
+                        <div class="row align-items-center mt-3">
+                            <div class="col-lg-3 col-12">
+                                Categoría:
+                            </div>
+                            <div class="col-lg-4 col-11">
+                                <mat-select class="select" name="categoria" id="categoria" [(ngModel)]="form.categoria"
+                                    #role="ngModel" required #categoria="ngModel">
+                                    <mat-option *ngFor="let categoria of categorias"
+                                        [value]="categoria.id">{{categoria.name}}</mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col-lg-4 col-12 form__cont-error" *ngIf="categoria.errors && f.submitted">
+                                <mat-icon>error</mat-icon>
+                                <ng-container class="form__texto-error" *ngIf="categoria.errors['required']">Indica la
+                                    categoría</ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button class="boton-grow" *ngIf="!isSuccessful && !editar">Registrar</button>
+                        <button class="boton-grow" *ngIf="!isSuccessful && editar">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row" *ngIf="isSignUpFailed">
+    <div class="col-12 form__cont-error">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="row" *ngIf="isSuccessful">
+    <ng-container *ngIf="!eliminar">
+        <button class="success" *ngIf="!editar && !eliminar">Registrado</button>
+        <button class="success" *ngIf="editar && !eliminar">Editado</button>
+    </ng-container>
+    <ng-container *ngIf="eliminar">
+        <button class="success" *ngIf="eliminar">Eliminado</button>
+    </ng-container>
+</div>

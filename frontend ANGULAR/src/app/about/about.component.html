@@ -1,0 +1,13 @@
+<div *ngIf="foto" class="container-fullscreen" [ngStyle]="{'background-image': foto}">
+  <div class="container-centrado">
+    <div class="container__texto">
+      Esto es <b class="text-msport">MSPORT</b>, <br> una plataforma donde ver tus entrenamientos, creada y desarrollada
+      por Hector Granell Oliva.<br> Aquí podrás
+      ver el entrenamiento que te asigne tu entrenador, de una manera organizada. <br> Ya no tendrás que preocuparte por
+      perder o pedir la foto de tu entrenamiento cada semana, porque siempre lo tendrás a mano en
+      nuestra plataforma, o si lo prefieres, descargarte el entrenamiento. <br>Además, en nuestra galería, podrás
+      encontrar enlaces a las fotos y videos de las competiciones que suba tu club, para recordar grandes momentos.
+    </div>
+  </div>
+  <button class="boton-grow" *ngIf="!logged" (click)="cambiarPagLogin()">INICIA SESIÓN</button>
+</div>

@@ -1,0 +1,29 @@
+.input {
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--color-azul);
+    transition: 0.3s;
+    width: 100%;
+    color: var(--color-light);
+   }
+   
+   .input:focus {
+    color: var(--color-light);
+    outline-color: #e8e8e8;
+    background: var(--color-azul-oscuro);
+    box-shadow: inset 20px 20px 60px var(--color-azul),
+           inset -20px -20px 60px var(--color-azul-oscuro);
+    transition: 0.3s;
+   }
+
+   .enviar {
+       width: 100%;
+   }
+
+   .error {
+       color: red;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }

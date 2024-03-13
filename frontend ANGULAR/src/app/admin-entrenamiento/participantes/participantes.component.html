@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-4"><button class="boton-atras" (click)="atras.emit(null)"><mat-icon> arrow_back_ios_new
+            </mat-icon></button></div>
+    <div class="col-5">
+        <span>Categoria:</span>
+        <mat-select class="select" (selectionChange)="filtrarCategoria(idCategoria)" name="temporada" [(ngModel)]="idCategoria"
+            id="temporada">
+            <mat-option [value]="0" selected>Todas</mat-option>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                {{ categoria.name }}
+            </mat-option>
+        </mat-select>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-between">
+    <div class="col-md-5 col-12">
+        <h2>Usuarios Asignados:</h2>
+        <div class="row lista-usuarios">
+            <div *ngFor="let usuario of usuariosEntrene" class="col-md-6 col-12 d-flex align-items-center justify-content-between usuarios">
+                <mat-icon *ngIf="usuario.sexo === 'Hombre'" class="sex">male</mat-icon>
+                <mat-icon *ngIf="usuario.sexo === 'Mujer'" class="sex">female</mat-icon>
+                {{usuario.nombre}} {{usuario.apellidos}}
+                <mat-icon  (click)="quitarUsuario(usuario.id)">arrow_right</mat-icon>
+            </div> 
+        </div>
+    </div>
+    <div class="col-md-5 col-12">
+        <h2>Usuarios Sin Entrene:</h2>
+        <div class="row lista-usuarios">
+            <div *ngIf="usuarios.length === 0" class=" col-12 d-flex align-items-center justify-content-between">
+                No hay usuarios sin entrenamiento.
+            </div>
+            <div *ngFor="let usuario of usuarios" class="col-md-6 col-12 d-flex align-items-center justify-content-between usuarios">
+                <mat-icon  (click)="agregarUsuario(usuario.id)" class="flecha">arrow_left</mat-icon>
+                {{usuario.nombre}} {{usuario.apellidos}}
+                <mat-icon *ngIf="usuario.sexo === 'Hombre'" class="sex">male</mat-icon>
+                <mat-icon *ngIf="usuario.sexo === 'Mujer'" class="sex">female</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

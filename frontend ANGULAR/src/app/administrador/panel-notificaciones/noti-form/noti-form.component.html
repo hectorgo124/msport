@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-3"><button class="boton-grow" (click)="atras.emit(null)"> <mat-icon>arrow_back</mat-icon></button>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-2 col-12">
+            Descripción:
+        </div>
+        <div class="col-md-6 col-12">
+            <ng-container>
+                <textarea [(ngModel)]="descripcion" (ngOnChanges)="errorDescripcion = false;" name="" id="" cols="25" rows="8"></textarea>
+            </ng-container>
+        </div>
+        <div *ngIf="errorDescripcion" class="col-md-4 col-12 error">
+            <mat-icon>error</mat-icon> Añade una descripción
+        </div>
+    </div>
+    <!-- Feches inicio y fin -->
+    <div class="row mt-3">
+        <div class="col-md-6 col-12">
+            <div class="row justify-content-center">
+                <h4>
+                    <mat-icon matTooltip="La fecha en que se mostrara este mensaje por primera vez.">info</mat-icon>
+                    Fecha Inicio:
+                </h4>
+            </div>
+            <div class="row justify-content-center">
+                <mat-calendar style="width:200px; border: 2px solid var(--color-azul); border-radius: 3px;"
+                    [(selected)]="fechaInicio" (selectedChange)="nuevaFecha()" [minDate]="hoy"
+                    [maxDate]="fechaFin"></mat-calendar>
+            </div>
+            <div class="row justify-content-center">
+                {{fechaInicioString}}
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="row justify-content-center">
+                <h4>
+                    <mat-icon matTooltip="La fecha en que se eliminará este mensaje.">info</mat-icon>
+                    Fecha Fin:
+                </h4>
+            </div>
+            <div class="row justify-content-center">
+                <mat-calendar style="width:200px; border: 2px solid var(--color-azul); border-radius: 3px;"
+                    [(selected)]="fechaFin" (selectedChange)="nuevaFecha()" [minDate]="fechaInicio"></mat-calendar>
+            </div>
+            <div class="row justify-content-center">
+                {{fechaFinString}}
+            </div>
+        </div>
+    </div>
+    <!-- Enlace -->
+    <div class="row mt-5 mb-5">
+        <div class="col-md-2 col-12">
+            Enlace:
+        </div>
+        <div class="col-md-6 col-12">
+                <input type="texto" class="input" [(ngModel)]="enlace" />
+        </div>
+    </div>
+
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 col-lg-6">
+            <button class="boton-grow enviar" *ngIf="editar" (click)="enviar()">
+                EDITAR
+            </button>
+            <button class="boton-grow enviar" *ngIf="!editar" (click)="enviar()">
+                AÑADIR
+            </button>
+        </div>
+    </div>
+</div>

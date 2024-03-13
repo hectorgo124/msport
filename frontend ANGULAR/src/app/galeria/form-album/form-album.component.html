@@ -1,0 +1,98 @@
+<div class="row">
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <!-- ATRAS -->
+        <div class="row">
+            <div class="form-group form__botones col-md-2 col-12">
+                <button class="boton-atras" (click)="atras.emit(null)">Atrás</button>
+            </div>
+        </div>
+        <!-- TITULO -->
+        <div class="row mt-2">
+            <div class="col-12 d-flex justify-content-center">
+                <h2>
+                    {{ accion }} Álbum
+                </h2>
+            </div>
+        </div>
+        <!-- formulario -->
+        <!-- descripcion -->
+        <div class="row align-items-center">
+            <div class="col-3 col-lg-4 d-flex justify-content-end">
+                Descripción:
+            </div>
+            <div class="col-9 col-md-5 d-flex justify-content-start align-items-center">
+                <input type="text" class="form-control" name="description" [(ngModel)]="form.description" required
+                    minlength="3" #description="ngModel" />
+                <mat-icon>description</mat-icon>
+            </div>
+            <div class="form__cont-error col-12 col-lg-3 col-md-4 align-items-center"
+                *ngIf="description.errors && f.submitted">
+                <mat-icon>error</mat-icon>
+                <div class="form__texto-error" *ngIf="description.errors['required']">Introduce una breve descripción
+                </div>
+                <div class="form__texto-error" *ngIf="description.errors['minlength']">
+                    Mínimo 3 caracteres
+                </div>
+            </div>
+        </div>
+        <!-- ENLACE -->
+        <div class="row align-items-center">
+            <div class="col-lg-4  col-3 d-flex justify-content-end">
+                Enlace:
+            </div>
+            <div class="col-md-5 col-9 d-flex justify-content-start align-items-center">
+                <input type="text" class="form-control" name="enlace" [(ngModel)]="form.enlace" required
+                    #enlace="ngModel" />
+                <mat-icon>link</mat-icon>
+            </div>
+            <div class=" form__cont-error col-12 col-md-4  col-lg-3 align-items-center"
+                *ngIf="enlace.errors && f.submitted">
+                <mat-icon>error</mat-icon>
+                <div class="form__texto-error" *ngIf="enlace.errors['required']">Introduce el enlace</div>
+            </div>
+        </div>
+        <!-- TEMPORADA -->
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-3 d-flex justify-content-end">
+                Temporada:
+            </div>
+            <div class="col-9 col-md-5 d-flex justify-content-start align-items-center">
+                <mat-select class="select" name="temporada" id="temporada" [(ngModel)]="form.temporada"
+                    #temporada="ngModel" required>
+                    <mat-option *ngFor="let temporada of temporadas" [value]="temporada.id">
+                        {{ temporada.description }}
+                    </mat-option>
+                </mat-select>
+                <mat-icon>event_note</mat-icon>
+            </div>
+            <div class="form__cont-error col-12 col-md-4 col-lg-3 align-items-center"
+                *ngIf="temporada.errors && f.submitted">
+                <mat-icon>error</mat-icon>
+                <div class="form__texto-error" *ngIf="temporada.errors['required']">Selecciona una temporada</div>
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-6 col-12">
+                <button class="boton-grow" *ngIf="!isEditar">Añadir</button>
+                <button class="boton-grow" *ngIf="isEditar">Editar</button>
+                <div class="form__cont-error" *ngIf="f.submitted && errorEnviar">
+                    <mat-icon>error</mat-icon>
+                    <div class="form__texto-error">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row d-flex justify-content-center" *ngIf="isSuccessful">
+        <div class="cont__label col-12 d-flex justify-content-center " *ngIf="!isEditar">
+            Nuevo álbum creado!
+        </div>
+        <div class="cont__label col-12 d-flex justify-content-center " *ngIf="isEditar">
+            Álbum editado!
+        </div>
+        <hr>
+        <button class="col-12 d-flex justify-content-center boton-grow" (click)="recargar()">Continuar</button>
+    </div>
+  
+</div>

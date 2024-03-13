@@ -1,0 +1,75 @@
+.form__grupo {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.cont__label {
+  width: 15%;
+}
+
+.cont__input {
+  margin-right: 15px;
+  width: 30%;
+}
+
+.form__texto {
+  min-width: 15%;
+  padding-top: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+// error
+.form__cont-error {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+  padding: 5px;
+  background-color: rgb(241, 174, 174);
+  border: 1px solid rgb(236, 50, 50);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.form__texto-error {
+  padding: 3px;
+  font-size: smaller;
+}
+
+.cont__final {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .cont__label {
+    display: flex;
+    width: 15%;
+    justify-content: center;
+  }
+}
+
+.select {
+  border: 3px solid var(--color-azul);
+  padding: 6px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.boton-atras, .boton-grow {
+  width: 100%;
+}
+

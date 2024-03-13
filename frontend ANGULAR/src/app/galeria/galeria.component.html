@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row" *ngIf="!crearAlbum">
+        <div class="col-md-3 col-lg-2 col-6 boton-grow" *ngIf="isContenido" (click)="abrirForm()">
+            <mat-icon>add</mat-icon> Añadir
+            álbum</div>
+        <div class="col-md-3 col-lg-2 col-6 boton-atras boton-eliminar" *ngIf="areSelected && isContenido"
+            (click)="eliminar()">
+            Eliminar
+        </div>
+        <div class="col-12 col-md-3 cont__select">
+            <span>Temporada:</span>
+            <mat-select class="select" (selectionChange)="filtrarTemporada(idTemporada)" name="temporada"
+                [(ngModel)]="idTemporada" id="temporada">
+                <mat-option [value]="0" selected>Todas</mat-option>
+                <mat-option *ngFor="let temporada of temporadas" [value]="temporada.id">
+                    {{ temporada.description }}
+                </mat-option>
+            </mat-select>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="!mensajeError && !crearAlbum">
+        <div class="col-md-4 col-12 album " *ngFor="let album of albums">
+            <div class="cont__enlace"><a href="{{ album.enlace }}">{{album.description}}</a><mat-icon
+                    class="icono-editar" (click)="editar(album.id)" *ngIf="isContenido">edit</mat-icon></div>
+            <div class="cont__temp mt-1"><span>{{album.temporada}}</span></div>
+            <label class="cont__checkbox" *ngIf="isContenido" (change)="selec(album.id, $event)"><input
+                    type="checkbox">
+                <svg viewBox="0 0 64 64" height="2em" width="2em">
+                    <path
+                        d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                        pathLength="575.0541381835938" class="path"></path>
+                </svg>
+            </label>
+        </div>
+
+    </div>
+    <div class="row mt-4" *ngIf="mensajeError && !crearAlbum">
+        <div class="col-md-12 col-12 d-flex justify-content-center">
+            <mat-icon>sentiment_dissatisfied</mat-icon>{{ mensajeError }}
+        </div>
+    </div>
+
+    <div class="row" *ngIf="crearAlbum">
+        <app-form-album (atras)="abrirForm()" [temporadas]="temporadas" [album]="albumEditar"
+            [clubId]="currentUser.clubId"></app-form-album>
+    </div>
+</div>
